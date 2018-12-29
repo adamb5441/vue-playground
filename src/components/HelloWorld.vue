@@ -4,8 +4,15 @@
       v-bind:list="stuff"
       v-bind:key="stuff.id"
       >
+        <div v-if="show">
+        <input type="text" v-model="stuff.item"/>
+        <button>update</button>
+        </div>
+        <div v-else>
       {{ stuff.item }}
+        </div>
       <button  v-on:click="onClick(stuff.id)">delete</button>
+      <button v-on:click="tog()">edit</button>
     </li>
   </div>
 </template>
@@ -17,6 +24,22 @@ export default {
     onClick: Function,
     list: Array
   },
+  data: function(){
+    return{
+      show: true
+    }
+  },
+  methods: {
+    tog: function(){
+      console.log("the function is running")
+      if(this.show == false){
+        this.show = true
+      }
+      else {
+        this.show = false
+      }
+    }
+  }
 }
 </script>
 
