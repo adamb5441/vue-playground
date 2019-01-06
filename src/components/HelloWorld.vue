@@ -1,19 +1,15 @@
 <template>
   <div class="hello">
-      <li v-for="stuff in list"
-      v-bind:list="stuff"
-      v-bind:key="stuff.id"
-      >
+
         <div v-if="show">
-        <input type="text" v-model="stuff.item"/>
-        <button>update</button>
+        <input type="text" value={stuff.item} v-model="userIn"/>
+        <button v-on:click="change(stuff.id,userIn)">update</button>
         </div>
         <div v-else>
       {{ stuff.item }}
         </div>
       <button  v-on:click="onClick(stuff.id)">delete</button>
       <button v-on:click="tog()">edit</button>
-    </li>
   </div>
 </template>
 
@@ -22,16 +18,17 @@ export default {
   name: 'HelloWorld',
   props: {
     onClick: Function,
-    list: Array
+    change: Function,
+    stuff: String
   },
   data: function(){
     return{
-      show: true
+      show: false,
+      userIn: ""
     }
   },
   methods: {
     tog: function(){
-      console.log("the function is running")
       if(this.show == false){
         this.show = true
       }

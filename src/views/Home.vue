@@ -3,7 +3,11 @@
     <img alt="Vue logo" src="../assets/logo.png">
     <input v-model="userIn"/>
     <button  v-on:click="add">add</button>
-    <HelloWorld v-bind:onClick='remove' v-bind:list='val'/>
+    <li v-for="stuff in val"
+          v-bind:key="stuff.id"
+    >
+    <HelloWorld v-bind:onClick='remove' v-bind:change="update" v-bind:stuff='stuff'/>
+    </li>
   </div>
 </template>
 
@@ -32,6 +36,13 @@ export default {
       for(let i =0;i< this.val.length;i++){
         if(this.val[i].id===index){
           this.val.splice(i,1)
+        }
+      }
+    },
+    update: function(index,v){
+      for(let i =0;i< this.val.length;i++){
+        if(this.val[i].id===index){
+          this.val[index].item=v;
         }
       }
     }
